@@ -1,24 +1,15 @@
-import { MeshReflectorMaterial } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import Floor from "./Floor";
+import { CustomLight } from "./Light";
 
 const Environment = () => {
   return (
     <>
-      <mesh rotation-x={Math.PI * -0.5}>
-        <planeGeometry args={[20, 20]} />
-        <MeshReflectorMaterial
-          blur={[0, 0]}
-          resolution={2048}
-          mixBlur={1}
-          mixStrength={80}
-          roughness={1}
-          depthScale={1.2}
-          minDepthThreshold={0.4}
-          maxDepthThreshold={1.4}
-          color="#010101"
-          metalness={0.5}
-          mirror={0}
-        />
-      </mesh>
+      <EffectComposer>
+        <Bloom mipmapBlur />
+      </EffectComposer>
+      <Floor />
+      <CustomLight rotation-y={Math.PI / 2.1} scale={2} position={[0, 0, 0]} />
     </>
   );
 };
