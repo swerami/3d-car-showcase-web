@@ -2,7 +2,10 @@
 export default {
   content: ["./index.html", "./src/**/*.{tsx,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+      'width': 'width',
+    },},
   },
   plugins: [],
 }
