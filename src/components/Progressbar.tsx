@@ -31,7 +31,7 @@ const ProgressBar = ({ caption, percent }: Props) => {
         </div>
       </div>
       <span className="mt-8 bg-neutral-500 px-2 text-white font-bold">
-        {Math.floor((currentPercent / 100) * 10)}
+        {((currentPercent / 100) * 10).toFixed(1)}
       </span>
     </div>
   );

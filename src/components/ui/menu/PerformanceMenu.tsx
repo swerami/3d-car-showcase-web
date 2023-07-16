@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { BsFillCarFrontFill } from "react-icons/bs";
 import ProgressBar from "../../Progressbar";
+import Compass from "../../Compass";
 
 const PerformanceMenu = () => {
   return (
     <>
-      <div className="flex flex-col h-[500px] bg-black/20 w-[400px] p-6">
+      <div className="flex flex-col h-[600px] bg-black/20 w-[400px] p-6 select-none">
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-col ">
             <p className="uppercase font-bold text-3xl text-white">Bugatti</p>
@@ -18,9 +19,17 @@ const PerformanceMenu = () => {
             <p className="text-3xl font-bold">340+</p>
           </div>
         </div>
-        <div>
+        <div className="border-b-2 border-neutral-500">
           <div className="flex flex-col">
-            <ProgressBar caption="idk" percent={7.6} />
+            <ProgressBar caption="power" percent={7.6} />
+            <ProgressBar caption="High speed" percent={7.6} />
+            <ProgressBar caption="acceleration" percent={10} />
+            <ProgressBar caption="nitrous" percent={10} />
+          </div>
+        </div>
+        <div className="w-full flex justify-center items-center">
+          <div className="w-64">
+            <Compass />
           </div>
         </div>
       </div>
