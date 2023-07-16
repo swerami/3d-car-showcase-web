@@ -1,13 +1,17 @@
 import {create} from 'zustand';
 
 interface NavigationStore {
-  activeMenu: string;
-  setActiveMenu: (value: string) => void;
+  activeNavItem: number;
+  activeMenu: number;
+  setActiveMenu: (value: number) => void;
+  setActiveNavItem: (value: number) => void;
 }
 
 const useNavigationStore = create<NavigationStore>((set) => ({
-  activeMenu: 'MYRIDE',
-  setActiveMenu: (value: string) => set({ activeMenu: value }), // Function to set the activeMenu
+  activeNavItem: 1,
+  activeMenu: 0,
+  setActiveNavItem: (value: number) => set({ activeNavItem: value }), 
+  setActiveMenu: (value: number) => set(({activeMenu: value}))
 }));
 
 export default useNavigationStore;

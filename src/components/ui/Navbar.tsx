@@ -1,17 +1,16 @@
-import { Html } from "@react-three/drei";
-import { useState } from "react";
+import useNavigationStore from "../../store/navigation";
 
 const Navbar = () => {
-  const [activeItem, setActiveItem] = useState<number>(1);
+  const { activeNavItem, setActiveNavItem } = useNavigationStore();
   let navItems = ["Showcase", "My Ride", "Character", "Racer Challenges"];
   return (
     <>
       <ul className="flex flex-row bg-black/20 w-fit gap-8">
         {navItems.map((item, index) => (
           <li
-            onClick={() => setActiveItem(index)}
-            className={`font-bold text-white select-none uppercase py-2 px-4 ${
-              activeItem == index ? "text-black bg-white" : ""
+            onClick={() => setActiveNavItem(index)}
+            className={`font-bold  select-none uppercase py-2 px-4 ${
+              activeNavItem == index ? "text-black bg-white" : "text-white"
             }`}
             key={index}
           >

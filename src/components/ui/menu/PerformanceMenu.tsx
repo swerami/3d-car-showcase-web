@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BsFillCarFrontFill } from "react-icons/bs";
 import ProgressBar from "../../Progressbar";
 import Compass from "../../Compass";
