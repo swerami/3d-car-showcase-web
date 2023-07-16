@@ -25,7 +25,7 @@ const Bottombar = () => {
             onClick={() => {
               setActiveMenu(index);
             }}
-            className={`w-full h-full flex flex-col gap-4 transition-colors duration-300 cursor-pointer items-center justify-center ${
+            className={`w-full h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center ${
               activeMenu === index
                 ? "text-black bg-white"
                 : "text-white bg-black/40"
