@@ -6,16 +6,16 @@ import useNavigationStore from "../../store/navigation";
 
 const Bottombar = () => {
   const menuItems = [
-    { label: "Performance", icon: CgPerformance },
-    { label: "Customization", icon: BiCustomize },
-    { label: "Swap Car (0)", icon: GiHomeGarage },
-    { label: "Studio", icon: SiRobloxstudio },
+    { label: "Performance", icon: CgPerformance, category: "performance" },
+    { label: "Customization", icon: BiCustomize, category: "customization" },
+    { label: "Swap Car (0)", icon: GiHomeGarage, category: "swapcar" },
+    { label: "Studio", icon: SiRobloxstudio, category: "studio" },
   ];
 
   const { activeMenu, setActiveMenu } = useNavigationStore();
 
   return (
-    <div className="w-2/3 h-full flex flex-row gap-2">
+    <div className="w-2/3 h-full max-h-[140px] flex flex-row gap-2">
       {menuItems.map((item, index) => {
         const IconComponent = item.icon;
 
@@ -23,10 +23,10 @@ const Bottombar = () => {
           <div
             key={index}
             onClick={() => {
-              setActiveMenu(index);
+              setActiveMenu(item.category);
             }}
-            className={`w-full h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center ${
-              activeMenu === index
+            className={`w-full min-w-[150px] h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center ${
+              activeMenu === item.category
                 ? "text-black bg-white"
                 : "text-white bg-black/40"
             }`}
