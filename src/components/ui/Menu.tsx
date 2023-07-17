@@ -1,32 +1,16 @@
-import { Html } from "@react-three/drei";
-import Navbar from "./Navbar";
-import PerformanceMenu from "./menu/PerformanceMenu";
-import Bottombar from "./Bottombar";
-import useNavigationStore from "../../store/navigation";
-import CarCustomizationMenu from "./menu/CarCustomizationMenu";
+import { ReactNode } from "react";
 
-const Menu = () => {
-  const { activeMenu } = useNavigationStore();
+interface Props {
+  children?: ReactNode;
+}
 
-  const currentActiveMenu = () => {
-    switch (activeMenu) {
-      case "performance":
-        return <PerformanceMenu />;
-      case "customization":
-        return <CarCustomizationMenu />;
-      default:
-        return null;
-    }
-  };
-
+const Menu = ({ children }: Props) => {
   return (
-    <Html as="div" fullscreen>
-      <div className="h-screen w-screen flex flex-col justify-between p-12 gap-6">
-        <Navbar />
-        {currentActiveMenu()}
-        <Bottombar />
+    <>
+      <div className="flex flex-col h-[600px] bg-black/20 w-[400px] p-6 select-none">
+        {children}
       </div>
-    </Html>
+    </>
   );
 };
 

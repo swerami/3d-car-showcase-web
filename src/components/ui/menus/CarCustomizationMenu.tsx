@@ -1,7 +1,7 @@
-import { Html } from "@react-three/drei";
+import Menu from "../Menu";
 
 const CarCustomizationMenu = () => {
-  return <div>hello world</div>;
+  return <Menu>hello world</Menu>;
 };
 
 export default CarCustomizationMenu;

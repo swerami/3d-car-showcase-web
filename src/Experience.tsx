@@ -2,7 +2,7 @@ import { OrbitControls } from "@react-three/drei";
 import { Bugatti } from "./components/Bugatti";
 import Environment from "./components/Environment";
 import Camera from "./components/Camera";
-import Menu from "./components/ui/Menu";
+import Menu from "./components/ui/MainMenu";
 
 const Experience = () => {
   return (

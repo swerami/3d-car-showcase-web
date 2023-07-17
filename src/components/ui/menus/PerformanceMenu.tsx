@@ -1,11 +1,12 @@
 import { BsFillCarFrontFill } from "react-icons/bs";
 import ProgressBar from "../../Progressbar";
 import Compass from "../../Compass";
+import Menu from "../Menu";
 
 const PerformanceMenu = () => {
   return (
     <>
-      <div className="flex flex-col h-[600px] bg-black/20 w-[400px] p-6 select-none">
+      <Menu>
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-col ">
             <p className="uppercase font-bold text-3xl text-white">Bugatti</p>
@@ -31,7 +32,7 @@ const PerformanceMenu = () => {
             <Compass />
           </div>
         </div>
-      </div>
+      </Menu>
     </>
   );
 };
