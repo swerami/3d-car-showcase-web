@@ -1,19 +1,33 @@
+import { useCustomizationStore } from "../../../store/customization";
 import Menu from "../Menu";
 
+const colorOptions = [
+  { name: "red", value: "#ff0000", tw: "bg-red-500" },
+  { name: "blue", value: "#0000ff", tw: "bg-blue-500" },
+  { name: "green", value: "#00ff00", tw: "bg-green-500" },
+];
+
 const CarCustomizationMenu = () => {
+  const { setBodyColor } = useCustomizationStore(); // Get bodyColor and setBodyColor from your store
+
+  const handleColorSelection = (colorValue: string) => {
+    setBodyColor(colorValue);
+  };
+
   return (
     <Menu>
       <div className="flex flex-col">
         <h3 className="text-white font-medium capitalize">Body Color:</h3>
-        <span className="h-10 w-10 block bg-red-400 rounded-full" />
-      </div>
-      <div className="flex flex-col">
-        <h3 className="text-white font-medium capitalize">wheel Color:</h3>
-        <span className="h-10 w-10 block bg-red-400 rounded-full" />
-      </div>
-      <div className="flex flex-col">
-        <h3 className="text-white font-medium capitalize">Mirror Color:</h3>
-        <span className="h-10 w-10 block bg-red-400 rounded-full" />
+        <div className="flex space-x-2">
+          {colorOptions.map((option) => (
+            <button
+              key={option.name}
+              // style={{ backgroundColor: option.value }}
+              className={`h-10 w-10 rounded-full ${option.tw}`}
+              onClick={() => handleColorSelection(option.value)}
+            />
+          ))}
+        </div>
       </div>
     </Menu>
   );

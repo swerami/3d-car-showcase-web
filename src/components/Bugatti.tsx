@@ -10,6 +10,7 @@ Title: Bugatti - La Voiture Noire
 import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useCustomizationStore } from "../store/customization";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -66,7 +67,15 @@ type GLTFResult = GLTF & {
 
 export function Bugatti(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/bugatti.glb") as GLTFResult;
-  const bodyColor = new THREE.MeshStandardMaterial({ color: "red" });
+  // const bodyColor = new THREE.MeshStandardMaterial({ color: "red" });
+  const {
+    bodyColor: bc,
+    hubcapColor: hc,
+    bodySecondaryColor: sc,
+  } = useCustomizationStore();
+  const bodyColor = new THREE.MeshStandardMaterial({ color: `${bc}` });
+  const hubcapColor = new THREE.MeshStandardMaterial({ color: `${hc}` });
+  const bodySecondaryColor = new THREE.MeshStandardMaterial({ color: `${sc}` });
 
   return (
     <group {...props} dispose={null}>
@@ -118,22 +127,26 @@ export function Bugatti(props: JSX.IntrinsicElements["group"]) {
         {/* car skirt */}
         <mesh
           geometry={nodes.Object_11.geometry}
-          material={materials.Matte__FF114182__sec_env_50_spec}
+          material={bc ? bodyColor : materials.Matte__FF114182__sec_env_50_spec}
         />
         {/* inside body obv */}
         <mesh
           geometry={nodes.Object_12.geometry}
-          material={materials.Matte__FF151515__spec}
+          material={sc ? bodySecondaryColor : materials.Matte__FF151515__spec}
         />
         {/* whole body except doors and skirt */}
         <mesh
           geometry={nodes.Object_13.geometry}
-          material={materials.Matte__FFFFFFFF__prim_env_50_spec}
+          material={
+            bc ? bodyColor : materials.Matte__FFFFFFFF__prim_env_50_spec
+          }
         />
         {/* vechile doors */}
         <mesh
           geometry={nodes.Object_14.geometry}
-          material={materials.Matte__FFFFFFFF__prim_env_50_spec}
+          material={
+            bc ? bodyColor : materials.Matte__FFFFFFFF__prim_env_50_spec
+          }
         />
         {/* add to customization menu. car lines and front */}
         <mesh
@@ -178,7 +191,9 @@ export function Bugatti(props: JSX.IntrinsicElements["group"]) {
         {/* wheeles */}
         <mesh
           geometry={nodes.Object_23.geometry}
-          material={materials.lavoiturecsr2_wheel__env_50_spec}
+          material={
+            hc ? hubcapColor : materials.lavoiturecsr2_wheel__env_50_spec
+          }
         />
         {/* car tires */}
         <mesh
