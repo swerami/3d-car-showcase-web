@@ -10,7 +10,7 @@ const colorOptions = [
 ];
 
 const CarCustomizationMenu = () => {
-  const { setBodyColor } = useCustomizationStore(); // Get bodyColor and setBodyColor from your store
+  const { setBodyColor } = useCustomizationStore();
 
   const handleColorSelection = (colorValue: string | null) => {
     setBodyColor(colorValue);
@@ -24,8 +24,7 @@ const CarCustomizationMenu = () => {
           {colorOptions.map((option) => (
             <button
               key={option.name}
-              // style={{ backgroundColor: option.value }}
-              className={`h-10 w-10 rounded-full ${option.tw}`}
+              className={`h-10 w-10 rounded-full ${option.tw} transition-transform transform focus:animate-wiggle`}
               onClick={() => handleColorSelection(option.value)}
             />
           ))}
