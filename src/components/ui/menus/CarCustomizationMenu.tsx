@@ -8,7 +8,20 @@ interface ColorOption {
   tw: string;
 }
 
-const colorOptions: ColorOption[] = [
+const bodyColorOptions: ColorOption[] = [
+  { name: "default", value: null, tw: "bg-white" },
+  { name: "black", value: "#000000", tw: "bg-neutral-800" },
+  { name: "red", value: "#ff0000", tw: "bg-red-500" },
+  { name: "blue", value: "#0000ff", tw: "bg-blue-500" },
+  { name: "green", value: "#00ff00", tw: "bg-green-500" },
+];
+
+const bodySecColorOptions: ColorOption[] = [
+  { name: "default", value: null, tw: "bg-white" },
+  { name: "black", value: "#000000", tw: "bg-neutral-800" },
+];
+
+const hubcapColorOptions: ColorOption[] = [
   { name: "default", value: null, tw: "bg-white" },
   { name: "black", value: "#000000", tw: "bg-neutral-800" },
   { name: "red", value: "#ff0000", tw: "bg-red-500" },
@@ -50,7 +63,7 @@ const CarCustomizationMenu: React.FC = () => {
             Body Color:
           </h3>
           <div className="flex space-x-2">
-            {colorOptions.map((option) => (
+            {bodyColorOptions.map((option) => (
               <ColorButton
                 key={option.name}
                 colorOption={option}
@@ -64,7 +77,7 @@ const CarCustomizationMenu: React.FC = () => {
             Body Secondary Color:
           </h3>
           <div className="flex space-x-2">
-            {colorOptions.map((option) => (
+            {bodySecColorOptions.map((option) => (
               <ColorButton
                 key={option.name}
                 colorOption={option}
@@ -78,7 +91,7 @@ const CarCustomizationMenu: React.FC = () => {
             Hubcap Color:
           </h3>
           <div className="flex space-x-2">
-            {colorOptions.map((option) => (
+            {hubcapColorOptions.map((option) => (
               <ColorButton
                 key={option.name}
                 colorOption={option}
