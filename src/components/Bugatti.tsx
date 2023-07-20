@@ -73,9 +73,18 @@ export function Bugatti(props: JSX.IntrinsicElements["group"]) {
     hubcapColor: hc,
     bodySecondaryColor: sc,
   } = useCustomizationStore();
-  const bodyColor = new THREE.MeshStandardMaterial({ color: `${bc}` });
-  const hubcapColor = new THREE.MeshStandardMaterial({ color: `${hc}` });
-  const bodySecondaryColor = new THREE.MeshStandardMaterial({ color: `${sc}` });
+  const bodyColor = new THREE.MeshStandardMaterial({
+    color: `${bc}`,
+    roughness: 0.2,
+  });
+  const hubcapColor = new THREE.MeshStandardMaterial({
+    color: `${hc}`,
+    roughness: 0.2,
+  });
+  const bodySecondaryColor = new THREE.MeshStandardMaterial({
+    color: `${sc}`,
+    roughness: 0.2,
+  });
 
   return (
     <group {...props} dispose={null}>
