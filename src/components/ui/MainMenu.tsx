@@ -5,10 +5,11 @@ import useNavigationStore from "../../store/navigation";
 import Menu from "./Menu";
 import PerformanceMenu from "./menus/PerformanceMenu";
 import CarCustomizationMenu from "./menus/CarCustomizationMenu";
+import useSettingsStore from "../../store/settings";
 
 const MainMenu = () => {
   const { activeMenu } = useNavigationStore();
-
+  const { camera } = useSettingsStore();
   const currentActiveMenu = () => {
     switch (activeMenu) {
       case "performance":
