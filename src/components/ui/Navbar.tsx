@@ -1,8 +1,10 @@
+import { useFrame } from "@react-three/fiber";
 import useNavigationStore from "../../store/navigation";
 
 const Navbar = () => {
   const { activeNavItem, setActiveNavItem } = useNavigationStore();
   let navItems = ["Showcase", "My Ride", "Character", "Racer Challenges"];
+
   return (
     <>
       <ul className="flex flex-row bg-black/20 w-fit gap-8">

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCustomizationStore } from "../../../store/customization";
 import Menu from "../Menu";
+import useSettingsStore from "../../../store/settings";
+import { useFrame } from "@react-three/fiber";
+import { gsap } from "gsap";
 
 interface ColorOption {
   name: string;
@@ -38,6 +41,9 @@ const CarCustomizationMenu: React.FC = () => {
   const { setBodyColor, setHubcapColor, setBodySecondaryColor } =
     useCustomizationStore();
 
+  const { wheelCam, setHubcapViewMode } = useSettingsStore();
+  const [wheelCamera, setWheelCamera] = useState(false);
+
   const setColor =
     (colorSetter: (colorValue: string | null) => void) =>
     (colorValue: string | null) => {
@@ -51,7 +57,10 @@ const CarCustomizationMenu: React.FC = () => {
     <button
       key={colorOption.name}
       className={`h-10 w-10 rounded-xl ${colorOption.tw} transition-transform transform focus:animate-wiggle`}
-      onClick={() => setColor(colorSetter)(colorOption.value)}
+      onClick={() => {
+        setColor(colorSetter)(colorOption.value);
+        setHubcapViewMode();
+      }}
     />
   );
 

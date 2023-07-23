@@ -6,10 +6,12 @@ import Menu from "./Menu";
 import PerformanceMenu from "./menus/PerformanceMenu";
 import CarCustomizationMenu from "./menus/CarCustomizationMenu";
 import useSettingsStore from "../../store/settings";
+import { useFrame } from "@react-three/fiber";
+import { gsap } from "gsap";
 
 const MainMenu = () => {
   const { activeMenu } = useNavigationStore();
-  const { camera } = useSettingsStore();
+  const { camera, hubcapViewMode, wheelCam } = useSettingsStore();
   const currentActiveMenu = () => {
     switch (activeMenu) {
       case "performance":
@@ -20,6 +22,11 @@ const MainMenu = () => {
         return <Menu />;
     }
   };
+  useFrame((state, delta) => {
+    if (hubcapViewMode) {
+      gsap.to(state.camera.position, { ...wheelCam.position, duration: 1 });
+    }
+  });
 
   return (
     <Html as="div" fullscreen>

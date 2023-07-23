@@ -2,6 +2,8 @@ import { Vector3 } from 'three';
 import { create } from 'zustand';
 
 interface SettingsStore {
+  hubcapViewMode: boolean;
+  setHubcapViewMode: () => void;
   originalPosition: Vector3;
   camera: {
     currentPosition: Vector3;
@@ -15,6 +17,8 @@ interface SettingsStore {
 }
 
 const useSettingsStore = create<SettingsStore>((set) => ({
+  hubcapViewMode: false,
+  setHubcapViewMode: () => set((state) => ({hubcapViewMode: !state.hubcapViewMode})),
   originalPosition:  new Vector3(0, 0, 0),
   camera: {
     currentPosition: new Vector3(2.9, 0.9, -4),
