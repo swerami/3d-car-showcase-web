@@ -11,7 +11,13 @@ import { gsap } from "gsap";
 
 const MainMenu = () => {
   const { activeMenu } = useNavigationStore();
-  const { camera, viewMode, wheelCam, originalPosition } = useSettingsStore();
+  const {
+    viewMode,
+    wheelCamPosition,
+    originalPosition,
+    cameraAnimated,
+    setCameraAnimated,
+  } = useSettingsStore();
   const currentActiveMenu = () => {
     switch (activeMenu) {
       case "performance":
@@ -23,42 +29,30 @@ const MainMenu = () => {
     }
   };
 
-  useFrame((state, delta) => {
-    // create a switch case function to do mulitple different functions depending on various cases
-    switch (viewMode) {
-      case ViewMode.ActiveBodyViewmode:
-        gsap.to(state.camera.position, {
-          x: originalPosition.x,
-          y: originalPosition.y,
-          z: originalPosition.z,
-          duration: 1,
-        });
-        state.camera.clear();
-        break;
-      case ViewMode.HubcapViewMode:
-        gsap.to(state.camera.position, { ...wheelCam.position, duration: 1 });
-        console.log("hi");
-        state.camera.clear();
-        state.camera.clearViewOffset();
-        state.camera.updateProjectionMatrix();
-        break;
-      default:
-        // state.camera.position.set(3, 2, -5);
-        state.camera.clear();
-        state.camera.clearViewOffset();
-        break;
+  useFrame((state) => {
+    if (cameraAnimated) {
+      switch (viewMode) {
+        case ViewMode.ActiveBodyViewmode:
+          gsap.to(state.camera.position, {
+            x: originalPosition.x,
+            y: originalPosition.y,
+            z: originalPosition.z,
+            duration: 1,
+          });
+          break;
+        case ViewMode.HubcapViewMode:
+          gsap.to(state.camera.position, { ...wheelCamPosition, duration: 1 });
+          state.camera.clear();
+          break;
+        default:
+          state.camera.position.set(
+            originalPosition.x,
+            originalPosition.y,
+            originalPosition.z
+          );
+          break;
+      }
     }
-
-    // if (viewMode) {
-    //   gsap.to(state.camera.position, { ...wheelCam.position, duration: 1 });
-    // } else if (viewMode) {
-    //   gsap.to(state.camera.position, {
-    //     x: originalPosition.x,
-    //     y: originalPosition.y,
-    //     z: originalPosition.z,
-    //     duration: 1,
-    //   });
-    // }
   });
 
   return (
@@ -66,6 +60,12 @@ const MainMenu = () => {
       <div className="h-screen w-screen flex flex-col justify-between p-12 gap-6">
         <Navbar />
         {currentActiveMenu()}
+        <button
+          onClick={() => setCameraAnimated()}
+          className="text-white font-bold"
+        >
+          RESET
+        </button>
         <Bottombar />
       </div>
     </Html>

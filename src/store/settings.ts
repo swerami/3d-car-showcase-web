@@ -1,34 +1,39 @@
 import { Vector3 } from 'three';
 import { create } from 'zustand';
 
+export enum ViewMode {
+  OriginalMode,
+  HubcapViewMode,
+  ActiveBodyViewmode,
+}
+
 interface SettingsStore {
-  hubcapViewMode: boolean;
-  setHubcapViewMode: () => void;
+  cameraAnimated: boolean;
+  setCameraAnimated: () => void;
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
   originalPosition: Vector3;
   camera: {
     currentPosition: Vector3;
     setPosition: (value: Vector3) => void;
   };
-  wheelCam :{
-    position: Vector3;
-    setPosition: (value: Vector3) => void;
-  };
-  
+  wheelCamPosition: Vector3;
 }
 
 const useSettingsStore = create<SettingsStore>((set) => ({
-  hubcapViewMode: false,
-  setHubcapViewMode: () => set((state) => ({hubcapViewMode: !state.hubcapViewMode})),
-  originalPosition:  new Vector3(0, 0, 0),
+  cameraAnimated: false,
+  setCameraAnimated: () => set((state)=> ({cameraAnimated: !state.cameraAnimated})),
+  viewMode: ViewMode.OriginalMode,
+  setViewMode: (mode: ViewMode) => set(() => ({ viewMode: mode })),
+  originalPosition: new Vector3(2, 2, -3),
   camera: {
     currentPosition: new Vector3(2.9, 0.9, -4),
-    setPosition: (value: Vector3) => set((state) => ({ camera: { ...state.camera, position: value } })),
-   
+    setPosition: (value: Vector3) => set((state) => ({
+      camera: { ...state.camera, position: value },
+    })),
   },
-  wheelCam: {
-    position: new Vector3(-1.8000000000000016, 0.5999999999999999, 2.0000000000000004),
-    setPosition: (value: Vector3) => set((state) => ({ wheelCam: { ...state.wheelCam, position: value } })),
-  }
+  wheelCamPosition: new Vector3(-1.8, 0.6, 2.0),
+
 }));
 
 export default useSettingsStore;

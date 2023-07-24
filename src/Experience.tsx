@@ -3,8 +3,6 @@ import { Bugatti } from "./components/Bugatti";
 import Environment from "./components/Environment";
 import Camera from "./components/Camera";
 import MainMenu from "./components/ui/MainMenu";
-import CameraControls from "./components/CameraControls";
-import { useFrame } from "@react-three/fiber";
 
 const Experience = () => {
   return (
@@ -16,7 +14,7 @@ const Experience = () => {
       </mesh> */}
       {/* <CameraControls /> */}
       <Environment />
-      <OrbitControls target={[0, 0, 0]} />
+      <OrbitControls makeDefault autoRotate autoRotateSpeed={0.1} />
       <MainMenu />
       <Camera />
       <ambientLight intensity={1} />

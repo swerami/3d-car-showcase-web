@@ -1,4 +1,3 @@
-import { useFrame } from "@react-three/fiber";
 import useNavigationStore from "../../store/navigation";
 
 const Navbar = () => {

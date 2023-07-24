@@ -1,68 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useCustomizationStore } from "../../../store/customization";
 import Menu from "../Menu";
-import useSettingsStore from "../../../store/settings";
-import { useFrame } from "@react-three/fiber";
-import { gsap } from "gsap";
-
-interface ColorOption {
-  name: string;
-  value: string | null;
-  tw: string;
-}
-
-const bodyColorOptions: ColorOption[] = [
-  { name: "default", value: null, tw: "bg-white" },
-  { name: "black", value: "#000000", tw: "bg-neutral-800" },
-  { name: "red", value: "#ff0000", tw: "bg-red-500" },
-  { name: "blue", value: "#0000ff", tw: "bg-blue-500" },
-  { name: "green", value: "#00ff00", tw: "bg-green-500" },
-];
-
-const bodySecColorOptions: ColorOption[] = [
-  { name: "default", value: null, tw: "bg-white" },
-  { name: "black", value: "#000000", tw: "bg-neutral-800" },
-];
-
-const hubcapColorOptions: ColorOption[] = [
-  { name: "default", value: null, tw: "bg-white" },
-  { name: "black", value: "#000000", tw: "bg-neutral-800" },
-  { name: "red", value: "#ff0000", tw: "bg-red-500" },
-  { name: "blue", value: "#0000ff", tw: "bg-blue-500" },
-  { name: "green", value: "#00ff00", tw: "bg-green-500" },
-];
-
-interface ColorButtonProps {
-  colorOption: ColorOption;
-  colorSetter: (colorValue: string | null) => void;
-}
+import { ViewMode } from "../../../store/settings";
+import ColorButton from "../ColorButton";
+import {
+  bodyColorOptions,
+  bodySecColorOptions,
+  hubcapColorOptions,
+} from "./CarPartsOptions/partsOptions";
 
 const CarCustomizationMenu: React.FC = () => {
   const { setBodyColor, setHubcapColor, setBodySecondaryColor } =
     useCustomizationStore();
-
-  const { wheelCam, setHubcapViewMode } = useSettingsStore();
-  const [wheelCamera, setWheelCamera] = useState(false);
-
-  const setColor =
-    (colorSetter: (colorValue: string | null) => void) =>
-    (colorValue: string | null) => {
-      colorSetter(colorValue);
-    };
-
-  const ColorButton: React.FC<ColorButtonProps> = ({
-    colorOption,
-    colorSetter,
-  }) => (
-    <button
-      key={colorOption.name}
-      className={`h-10 w-10 rounded-xl ${colorOption.tw} transition-transform transform focus:animate-wiggle`}
-      onClick={() => {
-        setColor(colorSetter)(colorOption.value);
-        setHubcapViewMode();
-      }}
-    />
-  );
 
   return (
     <Menu>
@@ -77,6 +26,7 @@ const CarCustomizationMenu: React.FC = () => {
                 key={option.name}
                 colorOption={option}
                 colorSetter={setBodyColor}
+                activeMode={ViewMode.ActiveBodyViewmode}
               />
             ))}
           </div>
@@ -91,6 +41,7 @@ const CarCustomizationMenu: React.FC = () => {
                 key={option.name}
                 colorOption={option}
                 colorSetter={setBodySecondaryColor}
+                activeMode={ViewMode.ActiveBodyViewmode}
               />
             ))}
           </div>
@@ -105,6 +56,7 @@ const CarCustomizationMenu: React.FC = () => {
                 key={option.name}
                 colorOption={option}
                 colorSetter={setHubcapColor}
+                activeMode={ViewMode.HubcapViewMode}
               />
             ))}
           </div>

@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 
 const CameraControls = () => {
-  const { camera, wheelCam, originalPosition } = useSettingsStore();
+  const { camera, wheelCamPosition, originalPosition } = useSettingsStore();
 
   const handleGoToWheel = () => {
     gsap.to(camera.currentPosition, {
