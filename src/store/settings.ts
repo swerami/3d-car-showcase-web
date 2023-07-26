@@ -9,7 +9,7 @@ export enum ViewMode {
 
 interface SettingsStore {
   cameraAnimated: boolean;
-  setCameraAnimated: () => void;
+  setCameraAnimated: (value: boolean) => void;
   viewMode: ViewMode;
   setViewMode: (mode: ViewMode) => void;
   originalPosition: Vector3;
@@ -22,7 +22,7 @@ interface SettingsStore {
 
 const useSettingsStore = create<SettingsStore>((set) => ({
   cameraAnimated: false,
-  setCameraAnimated: () => set((state)=> ({cameraAnimated: !state.cameraAnimated})),
+  setCameraAnimated: (value: boolean) => set(()=> ({cameraAnimated: value})),
   viewMode: ViewMode.OriginalMode,
   setViewMode: (mode: ViewMode) => set(() => ({ viewMode: mode })),
   originalPosition: new Vector3(2, 2, -3),

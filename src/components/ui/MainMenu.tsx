@@ -11,13 +11,8 @@ import { gsap } from "gsap";
 
 const MainMenu = () => {
   const { activeMenu } = useNavigationStore();
-  const {
-    viewMode,
-    wheelCamPosition,
-    originalPosition,
-    cameraAnimated,
-    setCameraAnimated,
-  } = useSettingsStore();
+  const { viewMode, wheelCamPosition, originalPosition, cameraAnimated } =
+    useSettingsStore();
   const currentActiveMenu = () => {
     switch (activeMenu) {
       case "performance":
@@ -60,12 +55,6 @@ const MainMenu = () => {
       <div className="h-screen w-screen flex flex-col justify-between p-12 gap-6">
         <Navbar />
         {currentActiveMenu()}
-        <button
-          onClick={() => setCameraAnimated()}
-          className="text-white font-bold"
-        >
-          RESET
-        </button>
         <Bottombar />
       </div>
     </Html>

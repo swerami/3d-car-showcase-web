@@ -3,6 +3,7 @@ import { BiCustomize } from "react-icons/bi";
 import { GiHomeGarage } from "react-icons/gi";
 import { SiRobloxstudio } from "react-icons/si";
 import useNavigationStore from "../../store/navigation";
+import useSettingsStore from "../../store/settings";
 
 const Bottombar = () => {
   const menuItems = [
@@ -13,17 +14,19 @@ const Bottombar = () => {
   ];
 
   const { activeMenu, setActiveMenu } = useNavigationStore();
+  const { setCameraAnimated } = useSettingsStore();
 
   return (
     <div className="w-2/3 h-full max-h-[140px] flex flex-row gap-2">
       {menuItems.map((item, index) => {
         const IconComponent = item.icon;
-
         return (
           <div
             key={index}
             onClick={() => {
               setActiveMenu(item.category);
+              if (item.category === "customization") setCameraAnimated(true);
+              else setCameraAnimated(false);
             }}
             className={`w-full min-w-[150px] h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center ${
               activeMenu === item.category
