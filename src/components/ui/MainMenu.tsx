@@ -8,9 +8,13 @@ import CarCustomizationMenu from "./menus/CarCustomizationMenu";
 import useSettingsStore, { ViewMode } from "../../store/settings";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
+import { useEffect } from "react";
+import { useCustomizationStore } from "../../store/customization";
+import { bodyColorOptions } from "./menus/CarPartsOptions/partsOptions";
 
 const MainMenu = () => {
   const { activeMenu } = useNavigationStore();
+  const { setBodyColor, setHubcapColor } = useCustomizationStore();
   const { viewMode, wheelCamPosition, originalPosition, cameraAnimated } =
     useSettingsStore();
   const currentActiveMenu = () => {
@@ -23,6 +27,19 @@ const MainMenu = () => {
         return <Menu />;
     }
   };
+  let bodyColor;
+  useEffect(() => {
+    bodyColor = Number(
+      localStorage.getItem(`activeIndex_${ViewMode.ActiveBodyViewmode}`)
+    );
+    let hubcapColor = Number(
+      localStorage.getItem(`activeIndex_${ViewMode.HubcapViewMode}`)
+    );
+    let bodySecondaryColor = localStorage.getItem(`activeIndex_3`);
+    setBodyColor(bodyColorOptions[bodyColor].value);
+    setHubcapColor(bodyColorOptions[hubcapColor].value);
+    console.log(bodyColor);
+  }, [bodyColor]);
 
   useFrame((state) => {
     if (cameraAnimated) {

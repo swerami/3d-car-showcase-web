@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCustomizationStore } from "../../../store/customization";
 import Menu from "../Menu";
 import { ViewMode } from "../../../store/settings";
@@ -12,6 +12,44 @@ import {
 const CarCustomizationMenu: React.FC = () => {
   const { setBodyColor, setHubcapColor, setBodySecondaryColor } =
     useCustomizationStore();
+  const getInitialActiveIndex = (mode: any, defaultValue: any) => {
+    const activeIndexFromStorage = localStorage.getItem(`activeIndex_${mode}`);
+    return activeIndexFromStorage
+      ? parseInt(activeIndexFromStorage, 10)
+      : defaultValue;
+  };
+
+  const [activeBodyIndex, setActiveBodyIndex] = useState(() =>
+    getInitialActiveIndex(ViewMode.ActiveBodyViewmode, 0)
+  );
+  const [activeBodySecIndex, setActiveBodySecIndex] = useState(() =>
+    getInitialActiveIndex(ViewMode.OriginalMode, 0)
+  );
+  const [activeHubcapIndex, setActiveHubcapIndex] = useState(() =>
+    getInitialActiveIndex(ViewMode.HubcapViewMode, 0)
+  );
+
+  useEffect(() => {
+    localStorage.setItem(
+      `activeIndex_${ViewMode.ActiveBodyViewmode}`,
+      activeBodyIndex.toString()
+    );
+    setBodyColor(bodyColorOptions[activeBodyIndex].value);
+  }, [activeBodyIndex]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      `activeIndex_${ViewMode.ActiveBodyViewmode}_sec`,
+      activeBodySecIndex.toString()
+    );
+  }, [activeBodySecIndex]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      `activeIndex_${ViewMode.HubcapViewMode}`,
+      activeHubcapIndex.toString()
+    );
+  }, [activeHubcapIndex]);
 
   return (
     <Menu>
@@ -24,10 +62,12 @@ const CarCustomizationMenu: React.FC = () => {
             {bodyColorOptions.map((option, index) => (
               <ColorButton
                 key={option.name}
-                index={index}
                 colorOption={option}
                 colorSetter={setBodyColor}
                 activeMode={ViewMode.ActiveBodyViewmode}
+                index={index}
+                isActive={activeBodyIndex === index}
+                setActiveIndex={setActiveBodyIndex}
               />
             ))}
           </div>
@@ -40,10 +80,12 @@ const CarCustomizationMenu: React.FC = () => {
             {bodySecColorOptions.map((option, index) => (
               <ColorButton
                 key={option.name}
-                index={index}
                 colorOption={option}
                 colorSetter={setBodySecondaryColor}
                 activeMode={ViewMode.ActiveBodyViewmode}
+                index={index}
+                isActive={activeBodySecIndex === index}
+                setActiveIndex={setActiveBodySecIndex}
               />
             ))}
           </div>
@@ -56,10 +98,12 @@ const CarCustomizationMenu: React.FC = () => {
             {hubcapColorOptions.map((option, index) => (
               <ColorButton
                 key={option.name}
-                index={index}
                 colorOption={option}
                 colorSetter={setHubcapColor}
                 activeMode={ViewMode.HubcapViewMode}
+                index={index}
+                isActive={activeHubcapIndex === index}
+                setActiveIndex={setActiveHubcapIndex}
               />
             ))}
           </div>
