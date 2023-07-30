@@ -35,10 +35,8 @@ const MainMenu = () => {
     let hubcapColor = Number(
       localStorage.getItem(`activeIndex_${ViewMode.HubcapViewMode}`)
     );
-    let bodySecondaryColor = localStorage.getItem(`activeIndex_3`);
     setBodyColor(bodyColorOptions[bodyColor].value);
     setHubcapColor(bodyColorOptions[hubcapColor].value);
-    console.log(bodyColor);
   }, [bodyColor]);
 
   useFrame((state) => {
@@ -66,7 +64,6 @@ const MainMenu = () => {
       }
     }
   });
-
   return (
     <Html as="div" fullscreen>
       <div className="h-screen w-screen flex flex-col justify-between p-12 gap-6">

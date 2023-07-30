@@ -4,6 +4,9 @@ import { GiHomeGarage } from "react-icons/gi";
 import { SiRobloxstudio } from "react-icons/si";
 import useNavigationStore from "../../store/navigation";
 import useSettingsStore from "../../store/settings";
+import AudioPlayer from "../AudioPlayer";
+import { useRef } from "react";
+import ReactHowler from "react-howler";
 
 const Bottombar = () => {
   const menuItems = [
@@ -13,32 +16,45 @@ const Bottombar = () => {
     { label: "Studio", icon: SiRobloxstudio, category: "studio" },
   ];
 
-  const { activeMenu, setActiveMenu } = useNavigationStore();
+  const { activeMenu, setActiveMenu, isPlaying, setIsPlaying } =
+    useNavigationStore();
   const { setCameraAnimated } = useSettingsStore();
+  const audioRef = useRef<ReactHowler>(null);
 
   return (
-    <div className="w-2/3 h-full max-h-[140px] flex flex-row gap-2">
-      {menuItems.map((item, index) => {
-        const IconComponent = item.icon;
-        return (
-          <div
-            key={index}
-            onClick={() => {
-              setActiveMenu(item.category);
-              if (item.category === "customization") setCameraAnimated(true);
-              else setCameraAnimated(false);
-            }}
-            className={`w-full min-w-[150px] h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center ${
-              activeMenu === item.category
-                ? "text-black bg-white"
-                : "text-white bg-black/40"
-            }`}
-          >
-            <IconComponent className="text-5xl" /> <p>{item.label}</p>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div className="w-2/3 h-full min-h-[140px] max-h-[140px] flex flex-row gap-2">
+        {menuItems.map((item, index) => {
+          const IconComponent = item.icon;
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                setActiveMenu(item.category);
+                if (item.category === "customization") setCameraAnimated(true);
+                else setCameraAnimated(false);
+                setIsPlaying(true);
+                if (audioRef.current) {
+                  audioRef.current.seek(0);
+                }
+              }}
+              className={`w-full min-w-[150px] h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center ${
+                activeMenu === item.category
+                  ? "text-black bg-white"
+                  : "text-white bg-black/40"
+              }`}
+            >
+              <IconComponent className="text-5xl" /> <p>{item.label}</p>
+            </button>
+          );
+        })}
+      </div>
+      <AudioPlayer
+        audioRef={audioRef}
+        src="./sounds/ui/menu_click_sfx.mp3"
+        isPlaying={isPlaying}
+      />
+    </>
   );
 };
 

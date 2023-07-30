@@ -61,7 +61,7 @@ const CarCustomizationMenu: React.FC = () => {
           <div className="flex space-x-2">
             {bodyColorOptions.map((option, index) => (
               <ColorButton
-                key={option.name}
+                key={index}
                 colorOption={option}
                 colorSetter={setBodyColor}
                 activeMode={ViewMode.ActiveBodyViewmode}
@@ -79,7 +79,7 @@ const CarCustomizationMenu: React.FC = () => {
           <div className="flex space-x-2">
             {bodySecColorOptions.map((option, index) => (
               <ColorButton
-                key={option.name}
+                key={index}
                 colorOption={option}
                 colorSetter={setBodySecondaryColor}
                 activeMode={ViewMode.ActiveBodyViewmode}
@@ -97,7 +97,7 @@ const CarCustomizationMenu: React.FC = () => {
           <div className="flex space-x-2">
             {hubcapColorOptions.map((option, index) => (
               <ColorButton
-                key={option.name}
+                key={index}
                 colorOption={option}
                 colorSetter={setHubcapColor}
                 activeMode={ViewMode.HubcapViewMode}

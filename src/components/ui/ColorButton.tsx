@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useSettingsStore, { ViewMode } from "../../store/settings";
 import { ColorOption } from "../../utilities/ColorOption";
 
@@ -7,7 +6,7 @@ interface ColorButtonProps {
   colorSetter: (colorValue: string | null) => void;
   activeMode: ViewMode;
   index: number;
-  isActive: boolean; // Pass isActive prop to determine active state
+  isActive: boolean;
   setActiveIndex: (index: number) => void;
 }
 
@@ -32,13 +31,13 @@ const ColorButton = ({
     <button
       key={colorOption.name}
       className={`h-10 w-10 rounded-xl ${
-        isActive ? "border-2 border-red-500" : "" // Apply 2px border when active
+        isActive ? "border-2 border-red-500" : ""
       } ${colorOption.tw} transition-transform transform focus:animate-wiggle`}
       onClick={() => {
         setCameraAnimated(true);
         setColor(colorSetter)(colorOption.value);
         setViewMode(activeMode);
-        setActiveIndex(index); // Notify the parent component about the active button
+        setActiveIndex(index);
       }}
     />
   );
