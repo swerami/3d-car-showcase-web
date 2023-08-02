@@ -7,6 +7,7 @@ import useSettingsStore from "../../store/settings";
 import AudioPlayer from "../AudioPlayer";
 import { useRef } from "react";
 import ReactHowler from "react-howler";
+import AudioWave from "../AudioWave";
 
 const Bottombar = () => {
   const menuItems = [
@@ -48,6 +49,12 @@ const Bottombar = () => {
             </button>
           );
         })}
+        <button
+          onClick={() => {}}
+          className={`w-full min-w-[150px] h-full flex flex-col gap-4 transition-colors select-none duration-300 cursor-pointer items-center justify-center `}
+        >
+          <AudioWave />
+        </button>
       </div>
       <AudioPlayer
         audioRef={audioRef}

@@ -4,16 +4,10 @@ import useNavigationStore from "../store/navigation";
 interface Props {
   isPlaying: boolean;
   src: string;
-  audioRef: React.RefObject<ReactHowler>;
-  // setIsPlaying?: (playing: boolean) => void;
+  audioRef?: React.RefObject<ReactHowler>;
 }
 
 const AudioPlayer = ({ src, isPlaying, audioRef }: Props) => {
-  // const handlePause = () => {
-  //   if (setIsPlaying) {
-  //     setIsPlaying(false);
-  //   }
-  // };
   const { setIsPlaying } = useNavigationStore();
 
   const handlePlay = () => {
@@ -27,7 +21,6 @@ const AudioPlayer = ({ src, isPlaying, audioRef }: Props) => {
   return (
     <ReactHowler
       volume={0.1}
-      // onPause={handlePause}
       ref={audioRef}
       src={src}
       onPlay={() => handlePlay()}

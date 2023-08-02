@@ -9,9 +9,9 @@ const CameraControls = () => {
 
   const handleGoToWheel = () => {
     gsap.to(camera.currentPosition, {
-      x: wheelCam.position.x,
-      y: wheelCam.position.y,
-      z: wheelCam.position.z,
+      x: wheelCamPosition.x,
+      y: wheelCamPosition.y,
+      z: wheelCamPosition.z,
       duration: 1,
       onUpdate: () => {
         useSettingsStore.setState((state) => ({
@@ -35,8 +35,7 @@ const CameraControls = () => {
     });
   };
 
-  useFrame((state, delta) => {
-    // Update camera position in the store when the camera is moved by other components or animation.
+  useFrame(() => {
     useSettingsStore.setState((state) => ({
       camera: {
         ...state.camera,
