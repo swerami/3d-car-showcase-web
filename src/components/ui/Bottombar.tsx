@@ -3,7 +3,7 @@ import { BiCustomize } from "react-icons/bi";
 import { GiHomeGarage } from "react-icons/gi";
 import { SiRobloxstudio } from "react-icons/si";
 import useNavigationStore from "../../store/navigation";
-import useSettingsStore, { ViewMode } from "../../store/settings";
+import useSettingsStore from "../../store/settings";
 import AudioPlayer from "../AudioPlayer";
 import { useRef } from "react";
 import ReactHowler from "react-howler";
@@ -18,7 +18,7 @@ const Bottombar = () => {
 
   const { activeMenu, setActiveMenu, isPlaying, setIsPlaying } =
     useNavigationStore();
-  const { setCameraAnimated, setViewMode } = useSettingsStore();
+  const { setCameraAnimated } = useSettingsStore();
   const audioRef = useRef<ReactHowler>(null);
 
   return (

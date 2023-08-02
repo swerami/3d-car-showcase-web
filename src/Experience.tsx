@@ -3,13 +3,46 @@ import { Bugatti } from "./components/Bugatti";
 import Environment from "./components/Environment";
 import Camera from "./components/Camera";
 import MainMenu from "./components/ui/MainMenu";
+import { useEffect, useRef, useState } from "react";
 
 const Experience = () => {
+  const [isAutoRotate, setAutoRotate] = useState(true);
+  const lastInteractionTime = useRef(Date.now());
+
+  useEffect(() => {
+    const handleClick = () => {
+      lastInteractionTime.current = Date.now();
+
+      setAutoRotate(false);
+    };
+
+    window.addEventListener("click", handleClick);
+
+    const inactivityCheckInterval = setInterval(() => {
+      const currentTime = Date.now();
+      const timeSinceLastInteraction =
+        currentTime - lastInteractionTime.current;
+
+      if (timeSinceLastInteraction >= 5000) {
+        setAutoRotate(true);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(inactivityCheckInterval);
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   return (
     <>
       <Bugatti position={[0, 0.54, 0]} scale={0.02} />
       <Environment />
-      <OrbitControls makeDefault autoRotate autoRotateSpeed={0.1} />
+      <OrbitControls
+        makeDefault
+        autoRotate={isAutoRotate}
+        autoRotateSpeed={0.1}
+      />
       <MainMenu />
       <Camera />
       <ambientLight intensity={1} />
