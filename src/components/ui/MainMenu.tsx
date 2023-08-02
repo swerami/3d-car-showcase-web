@@ -15,8 +15,14 @@ import { bodyColorOptions } from "./menus/CarPartsOptions/partsOptions";
 const MainMenu = () => {
   const { activeMenu } = useNavigationStore();
   const { setBodyColor, setHubcapColor } = useCustomizationStore();
-  const { viewMode, wheelCamPosition, originalPosition, cameraAnimated } =
-    useSettingsStore();
+  const {
+    viewMode,
+    wheelCamPosition,
+    originalPosition,
+    PerformancePosition,
+    cameraAnimated,
+    camera,
+  } = useSettingsStore();
   const currentActiveMenu = () => {
     switch (activeMenu) {
       case "performance":
@@ -52,14 +58,14 @@ const MainMenu = () => {
           break;
         case ViewMode.HubcapViewMode:
           gsap.to(state.camera.position, { ...wheelCamPosition, duration: 1 });
-          state.camera.clear();
           break;
         default:
-          state.camera.position.set(
-            originalPosition.x,
-            originalPosition.y,
-            originalPosition.z
-          );
+          gsap.to(state.camera.position, {
+            x: originalPosition.x,
+            y: originalPosition.y,
+            z: originalPosition.z,
+            duration: 1,
+          });
           break;
       }
     }

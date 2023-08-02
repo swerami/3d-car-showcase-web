@@ -14,7 +14,7 @@ const AudioWave = () => {
         onClick={() => {
           handleClick();
         }}
-        className="flex flex-row gap-2 justify-center items-center"
+        className="flex flex-row gap-2 justify-center items-center cursor-pointer"
       >
         <span
           className={`w-1 transition-all ease-linear duration-300 bg-white ${
@@ -33,7 +33,11 @@ const AudioWave = () => {
         ></span>
       </div>
 
-      <AudioPlayer isPlaying={active} src="./sounds/music/ambient_sound.mp3" />
+      <AudioPlayer
+        repeat={true}
+        isPlaying={active}
+        src="./sounds/music/ambient_sound.mp3"
+      />
     </>
   );
 };

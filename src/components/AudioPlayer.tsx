@@ -3,11 +3,12 @@ import useNavigationStore from "../store/navigation";
 
 interface Props {
   isPlaying: boolean;
+  repeat?: boolean;
   src: string;
   audioRef?: React.RefObject<ReactHowler>;
 }
 
-const AudioPlayer = ({ src, isPlaying, audioRef }: Props) => {
+const AudioPlayer = ({ src, isPlaying, audioRef, repeat = false }: Props) => {
   const { setIsPlaying } = useNavigationStore();
 
   const handlePlay = () => {
@@ -22,6 +23,7 @@ const AudioPlayer = ({ src, isPlaying, audioRef }: Props) => {
     <ReactHowler
       volume={0.1}
       ref={audioRef}
+      loop={repeat}
       src={src}
       onPlay={() => handlePlay()}
       onEnd={() => handleEnd()}

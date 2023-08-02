@@ -3,6 +3,7 @@ import { create } from 'zustand';
 
 export enum ViewMode {
   OriginalMode,
+  PerformanceViewMode,
   HubcapViewMode,
   ActiveBodyViewmode,
 }
@@ -13,6 +14,7 @@ interface SettingsStore {
   viewMode: ViewMode;
   setViewMode: (mode: ViewMode) => void;
   originalPosition: Vector3;
+  PerformancePosition: Vector3;
   camera: {
     currentPosition: Vector3;
     setPosition: (value: Vector3) => void;
@@ -26,6 +28,7 @@ const useSettingsStore = create<SettingsStore>((set) => ({
   viewMode: ViewMode.OriginalMode,
   setViewMode: (mode: ViewMode) => set(() => ({ viewMode: mode })),
   originalPosition: new Vector3(2, 2, -3),
+  PerformancePosition: new Vector3(2.9, 0.9, -4),
   camera: {
     currentPosition: new Vector3(2.9, 0.9, -4),
     setPosition: (value: Vector3) => set((state) => ({
