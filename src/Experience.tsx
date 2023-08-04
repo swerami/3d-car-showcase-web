@@ -10,27 +10,26 @@ const Experience = () => {
   const lastInteractionTime = useRef(Date.now());
 
   useEffect(() => {
-    const handleClick = () => {
+    const handleMouseMove = () => {
       lastInteractionTime.current = Date.now();
-
       setAutoRotate(false);
     };
 
-    window.addEventListener("click", handleClick);
+    window.addEventListener("mousemove", handleMouseMove);
 
     const inactivityCheckInterval = setInterval(() => {
       const currentTime = Date.now();
       const timeSinceLastInteraction =
         currentTime - lastInteractionTime.current;
 
-      if (timeSinceLastInteraction >= 5000) {
+      if (timeSinceLastInteraction >= 3000) {
         setAutoRotate(true);
       }
     }, 1000);
 
     return () => {
       clearInterval(inactivityCheckInterval);
-      window.removeEventListener("click", handleClick);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
